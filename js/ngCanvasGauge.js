@@ -29,8 +29,6 @@
                 var oldValue = 0;
                 var direction = 0;
 
-
-
                 var render = function(val) {
                     
                     var value = val || 0;
@@ -77,7 +75,7 @@
                         ctx.shadowOffsetX = 1;
                         ctx.shadowOffsetY = 1;   
                         ctx.shadowBlur = 0;     
-                        ctx.fillText(mask.replace(placeholder, value.toFixed(2)), x, y);
+                        ctx.fillText(mask.replace(placeholder, parseFloat(value.toFixed(2)).toString()), x, y);
 
                         if (canvas.width > 119) { 
                             y = (canvas.width / 2.2) + calcPercent(canvas.height, 10) + (canvas.width / 100) - 1;   
@@ -113,6 +111,8 @@
                 }
 
 
+
+
                 $scope.shadeColors = function(color, percent) {
 
                     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255;
@@ -139,6 +139,7 @@
                     animate();
                     
                 });
+
             }
         }
     });

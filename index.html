@@ -1,0 +1,247 @@
+<html ng-app="test_percDisplay">
+<head>
+    <title>Canvas Gauge Directive</title>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/ngCanvasGauge.css" />
+</head>
+
+
+<body ng-controller="mainController" style="font-family: verdana">
+
+    <center>
+
+        <h2>ngCanvasGauge Directive</h2>
+
+
+        <br />
+        <div style="font-size: 12px; width: 700px; text-align: left">
+
+            <p>This directive has no dependencies other than Angular itself. Version 1.3.11 was used. It was designed to compose a lightweight dashboard and now can be freely downloaded and used in whatever purpose its MIT licence allows.</p>
+
+
+        </div>
+
+        <br />
+        <table style="normal font: 12px arial; width: 700px; border: 1px solid #DADADA" cellspacing="0" cellpadding="8">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        World Demographics
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 12px">
+                <tr>
+                    <th>Males</th>
+                    <th>Urban</th>
+                    <th>Seniors</th>
+                    <th>Literacy</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <canvas-gauge width="160" under-color="#EFEFEF" over-color="#FFD700" value="males" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>
+
+                    <td>
+                        <canvas-gauge width="160" under-color="#EFEFEF" over-color="#FF4500" value="urban" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>   
+
+                    <td>
+                        <canvas-gauge width="160" under-color="#EFEFEF" over-color="#663399" value="seniors" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>  
+                    <td>
+                        <canvas-gauge width="160" under-color="#EFEFEF" over-color="#2E8B57" value="literacy" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>                         
+                </tr>
+
+                <tr>
+                    <td style="text-align: right; padding-top: 20px;" colspan="4">
+                        Source: <a href="http://www.indexmundi.com/world/demographics_profile.html">Index Mundi</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="font-size: 12px; width: 700px">
+            <p style="text-align: left">The example above shows how easy it is to present nice looking statistical data in a static manner. Below is the code used to achieve this result:</p>
+
+            <code style="text-align: left; color: maroon;"><pre>
+&lt;canvas-gauge width="160" under-color="#EFEFEF" over-color="#FFD700" value="males" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+
+&lt;canvas-gauge width="160" under-color="#EFEFEF" over-color="#FF4500" value="urban" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+
+&lt;canvas-gauge width="160" under-color="#EFEFEF" over-color="#663399" value="seniors" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+
+&lt;canvas-gauge width="160" under-color="#EFEFEF" over-color="#2E8B57" value="literacy" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+            </pre></code>
+        </div>
+
+
+
+        <br />
+
+        <table style="normal font: 12px arial; width: 700px; border: 1px solid #DADADA" cellspacing="0" cellpadding="8">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Population by Age Structure
+                    </th>
+                </tr>
+            </thead>            
+            <tbody style="font-size: 12px">
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <select ng-change="setStats()" ng-model="stats">
+                            <option value="1">Aged Between 0 -14 Years</option>
+                            <option value="2">Aged Between 15 - 64 Years</option>
+                            <option value="3">Aged Between 65 and Over</option>
+                        </select>
+                    </td>
+                </tr>    
+
+                <tr>
+                    <th>Males</th>
+                    <th>Females</th>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center;">
+                        <canvas-gauge width="300" under-color="#EFEFEF" over-color="#6495ED" value="malestat" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>
+
+                    <td style="text-align: center;">
+                        <canvas-gauge width="300" under-color="#EFEFEF" over-color="#E9967A" value="femalestat" mask="(@)%" style="color: gray"></canvas-gauge>
+                    </td>   
+                </tr>
+
+                <tr>
+                    <td style="text-align: right; padding-top: 20px;" colspan="4">
+                        Source: <a href="http://en.wikipedia.org/wiki/Demographics_of_the_world#Age_structure">Wikipedia</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="font-size: 12px; width: 700px">
+            <p style="text-align: left">The example above shows the same kind of presentation but with dynamic data. Change the age structure dropdown and the gauges change accordingly</p>
+
+            <code style="text-align: left; color: maroon"><pre>
+&lt;canvas-gauge width="300" under-color="#EFEFEF" over-color="#6495ED" value="malestat" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+
+&lt;canvas-gauge width="300" under-color="#EFEFEF" over-color="#E9967A" value="femalestat" mask="(@)%"
+style="color: gray"&gt;&lt;/canvas-gauge&gt;
+            </pre></code>
+        </div>
+
+
+
+
+
+        <div style="font-size: 12px; width: 700px">
+            <hr />
+
+            <div style="text-align: left">
+                <h2>API</h2>
+
+                <p><b>Element <font color="RoyalBlue">&lt;canvas-gauge&gt;</font></b></p>
+                <p>Used to generate the gauge. Will calculate the necessary height based on the given width. The ratio is 55%.</p>
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">width</font></b></p>
+                <p>Sets the gauge's width in pixels. It's height will be calculated and is always 55% of its width. Default is 100. Plain attribute.</p>
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">over-color</font></b></p>
+                <p>Sets the gauge's value color. This color is used to paint over the base semi-circle, up to the point calculated by the value supplied. It is also the color used to paint the value in the middle of the gauge. The shadow color used is over-color 30% darkened. Plain attribute.</p>            
+                
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">under-color</font></b></p>
+                <p>Sets the gauge's primer, or under, color. This color is used to paint the base semi-circle. Plain attribute.</p>
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">value</font></b></p>
+                <p>Sets the gauge's value. This attribute works with min and max to calculate up to what point the gauge should be painted. It is a model attribute that updates the gauge when its value change.</p>      
+
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">min</font></b></p>
+                <p>Sets the gauge's minimum value used to calculate the gauge's painting. This value is shown below the left base of the gauge's semi-circle. Default is 0. Plain attribute.</p>    
+
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">max</font></b></p>
+                <p>Set the gauge's maximum value used to calculate the gauge's painting. This value is shown below the right base of the gauge's semi-circle. Default is 100. Plain attribute.</p>       
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">placeholder</font></b></p>
+                <p>It is used along with the mask attribute to set an expression to be shown in the bottom center of the gauge. The placeholder will be replaced with the value of the value attribute. Default is (@). Plain attribute.</p>    
+
+                <br />
+
+                <p><b>Attribute <font color="RoyalBlue">mask</font></b></p>
+                <p>Is used to let other characters be composed with the value shown. To use it from your expression, make sure the placeholder value is somewhere in it. For instance, to show percentage use <code style="color: maroon">mask="(@)%"</code>. To show a dollar value use <code style="color: maroon">mask="$ (@)"</code>. Default is the value of placeholder attribute. Plain attribute.</p>   
+            </div>
+
+        </div>
+    </center>
+
+
+    
+
+
+
+
+
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="js/angular.min.js" type="text/javascript"></script>
+    <script src="js/ngCanvasGauge.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        var app = angular.module('test_percDisplay', ['ngCanvasGauge']);
+
+        app.controller('mainController', function($scope) {
+
+            $scope.males = 50.7;
+            $scope.urban = 53;
+            $scope.seniors = 16.83;
+            $scope.literacy = 84.1;
+            $scope.malestat = 0;
+            $scope.femalestat = 0;
+
+            $scope.stats = 1;
+
+            $scope.population = [ { m: 944987919, f: 884268378 }, {m: 2234860865, f: 2187838153 }, { m: 227164176, f: 289048221} ];
+
+            $scope.setStats = function() {
+
+                var tot = 6768167712;
+                var item = $scope.population[$scope.stats - 1];
+
+                $scope.malestat = ((item.m * 100) / tot).toFixed(2);
+                $scope.femalestat = ((item.f * 100) / tot).toFixed(2);
+            }
+
+            $scope.setVal = function() {
+                $scope.value = Math.floor((Math.random() * 100) + 1); 
+            }
+            $scope.setStats();
+        });
+
+    </script>
+</body>
+</html>

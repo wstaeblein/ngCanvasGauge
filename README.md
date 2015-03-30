@@ -7,6 +7,8 @@ This directive has no dependencies other than Angular itself. Angular version 1.
 Check out the <a href="http://rawgit.com/wstaeblein/ngCanvasGauge/master/index.html" target="blank">demo</a>
 
 
+
+
 Licence
 -------
 

@@ -2,6 +2,8 @@
 
 Creates a semi circular gauge using HTML 5's canvas tag and Angular.js
 
+This directive has no dependencies other than Angular itself. Angular version 1.3.11 was used.
+
 Check out the <a href="http://rawgit.com/wstaeblein/ngCanvasGauge/master/index.html" target="blank">demo</a>
 
 

@@ -39,7 +39,7 @@
 
                         var calcPercent = function(total, perc) { return (total * perc) / 100; }
 
-                        var per            = ((value - $scope.min) * 100) / ($scope.max - $scope.min);      // Valor convertido para porcentagem usando min e max 
+                        var per            = ((value - $scope.min) * 100) / ($scope.max - $scope.min);      // Value converted to percentage using min and max 
                         var pad            = calcPercent(canvas.width, 15);                                 // Inner padding around the container
                         var x              = canvas.width / 2;                                              // x coordinate
                         var y              = (canvas.width / 2.3);                                          // y coordinate

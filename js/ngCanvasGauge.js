@@ -23,7 +23,13 @@
                 var mask = attrs.mask || placeholder;
                 var canvas = element[0];
 
-                $scope.render = function(val) {
+                var animID = 0;
+                var curValue = 0;
+                var endValue = 0;
+                var oldValue = 0;
+                var direction = 0;
+
+                var render = function(val) {
                     
                     var value = val || 0;
 
@@ -33,7 +39,7 @@
 
                         var calcPercent = function(total, perc) { return (total * perc) / 100; }
 
-                        var per            = ((value - $scope.min) * 100) / ($scope.max - $scope.min);      // Valor convertido para porcentagem usando min e max 
+                        var per            = ((value - $scope.min) * 100) / ($scope.max - $scope.min);      // Value converted to percentage using min and max 
                         var pad            = calcPercent(canvas.width, 15);                                 // Inner padding around the container
                         var x              = canvas.width / 2;                                              // x coordinate
                         var y              = (canvas.width / 2.3);                                          // y coordinate
@@ -69,7 +75,7 @@
                         ctx.shadowOffsetX = 1;
                         ctx.shadowOffsetY = 1;   
                         ctx.shadowBlur = 0;     
-                        ctx.fillText(mask.replace(placeholder, value), x, y);
+                        ctx.fillText(mask.replace(placeholder, parseFloat(value.toFixed(2)).toString()), x, y);
 
                         if (canvas.width > 119) { 
                             y = (canvas.width / 2.2) + calcPercent(canvas.height, 10) + (canvas.width / 100) - 1;   
@@ -89,6 +95,23 @@
                     }
                 }
 
+                var animate = function() {
+
+                    var flag = direction == 1 ? (curValue <= endValue) : (curValue >= endValue); 
+                    if (flag == true) {
+                        render(curValue);
+
+                        curValue += direction;
+                        animID = requestAnimationFrame(animate);
+                    } else {
+                        oldValue = endValue;
+                        render(endValue);
+                        cancelAnimationFrame(animID);
+                    }
+                }
+
+
+
 
                 $scope.shadeColors = function(color, percent) {
 
@@ -101,7 +124,7 @@
                 }
 
 
-                $scope.$watch('val', function(newval, oldval) {
+                $scope.$watch('val', function(newval, oldval) { 
 
                     $scope.min = attrs.min || 0;
                     $scope.max = attrs.max || 100;
@@ -109,7 +132,12 @@
                     $scope.overColor = attrs.overColor || '#000';
                     $scope.textColor = attrs.textColor || $scope.overColor
                     $scope.smallTextColor = attrs.smallTextColor || getComputedStyle(element[0]).getPropertyValue("color");
-                    $scope.render(newval);
+
+                    curValue = parseFloat(oldValue);
+                    endValue = parseFloat(newval);                      //alert(curValue + ' -- ' + endValue);
+                    direction = endValue < curValue ? -1 : 1;
+                    animate();
+                    
                 });
 
             }
